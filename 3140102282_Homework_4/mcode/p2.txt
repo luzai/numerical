@@ -1,0 +1,2 @@
+\[ \left(\begin{array}{c} - \left(x - 1\right)\, \left(x - 2\right)\, \left(x - \frac{1}{2}\right)\\ \frac{8\, x\, \left(x - 1\right)\, \left(x - 2\right)}{3}\\ - 2\, x\, \left(x - 2\right)\, \left(x - \frac{1}{2}\right)\\ \frac{x\, \left(x - 1\right)\, \left(x - \frac{1}{2}\right)}{3} \end{array}\right) \] 
+ \[ \left(\begin{array}{c}  - 1\, x^3 + \frac{7\, x^2}{2} - \frac{7\, x}{2} + 1\\ \frac{8\, x^3}{3} - 8\, x^2 + \frac{16\, x}{3}\\  - 2\, x^3 + 5\, x^2 - 2\, x\\ \frac{x^3}{3} - \frac{x^2}{2} + \frac{x}{6} \end{array}\right)\] 

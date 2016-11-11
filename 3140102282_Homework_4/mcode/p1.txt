@@ -1,0 +1,2 @@
+\[ \left(\begin{array}{c} \frac{50\, \left(x - \frac{3}{5}\right)\, \left(x - \frac{3}{10}\right)}{9}\\ -\frac{100\, x\, \left(x - \frac{3}{5}\right)}{9}\\ \frac{50\, x\, \left(x - \frac{3}{10}\right)}{9} \end{array}\right) \] 
+ \[ \left(\begin{array}{c} \frac{50\, x^2}{9} - 5\, x + 1\\  - \frac{100\, x^2}{9} + \frac{20\, x}{3}\\ \frac{50\, x^2}{9} - \frac{5\, x}{3} \end{array}\right)\] 

@@ -1,0 +1,348 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{CJK}
+\usepackage{comment}
+\usepackage{amsmath, amssymb ,amsthm, amscd,amsfonts,latexsym}
+\usepackage{graphicx}
+\usepackage{indentfirst}
+\usepackage{titlesec}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage[top=25.4mm, bottom=25.4mm, left=31.7mm, right=32.2mm]{geometry}
+%页面设置
+\begin{CJK*}{GBK}{hei}
+\theoremstyle{definition}
+\newtheoremstyle{mythm}{1.5ex plus 1ex minus .2ex}{1.5ex plus 1ex minus .2ex}{\kai}{\parindent}{\song\bfseries}{}{1em}{}
+\newtheoremstyle{mythm}{1ex}{1ex}%定理环境的上下间距.
+{\CJKfamily{song}}{\parindent}{\CJKfamily{hei} \bf}{}{1em}{}%定理内容为宋体, 缩进, 定理名称为黑粗体
+\theoremstyle{mythm}%设置定理环境
+\newtheorem{thm}{定理~}[section]
+\newtheorem{lem}[thm]{引理~}
+\newtheorem{pro}[thm]{性质~}
+\newtheorem{fact}[thm]{Fact}
+\newtheorem{prop}[thm]{命题~}
+\newtheorem{ques}[thm]{问题~}
+\newtheorem{cor}[thm]{推论~}
+\newtheorem{de}[thm]{定义~}
+\newtheorem{rem}[thm]{注记~}
+\numberwithin{equation}{section}
+\end{CJK*}
+\renewcommand\refname{\CJKfamily{hei}参考文献}
+\renewcommand{\abstractname}{摘要}
+%%%%%%%%%%%%%%%%下面几行用于改变证明环境的定义
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+\pushQED{\qed}%
+\normalfont \topsep6\p@\@plus6\p@ \labelsep1em\relax
+\trivlist
+\item[\hskip\labelsep\indent
+\bfseries #1]\ignorespaces
+}{%
+\popQED\endtrivlist\@endpefalse
+}
+\makeatother
+%%%%%%%%%%%%%%(http://latex.yo2.cn)
+\renewcommand{\proofname}{\CJKfamily{hei}证明}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\makeatletter
+\def\@seccntformat#1{%
+  \expandafter\ifx\csname c@#1\endcsname\c@section\else
+  \csname the#1\endcsname\quad
+  \fi}
+\makeatother
+
+\usepackage[framed,numbered,autolinebreaks,useliterate,final]{mcode}
+\usepackage{listings}
+
+\usepackage{sectsty}
+\sectionfont{\color{NavyBlue}\selectfont\bf\CJKfamily{hei}}
+\subsectionfont{\color{Blue}\itshape\selectfont\CJKfamily{hei}}
+
+\begin{document}
+%\setlength{\baselineskip}{1ex}%设置行距
+\setlength{\abovedisplayskip}{1ex} %设置公式上边间距
+\setlength{\belowdisplayskip}{1ex} %设置公式下边间距
+\begin{CJK*}{GBK}{song}
+\CJKfamily{song}
+\title{数值分析作业 \# 4}
+\date{}
+\author{王兴路\qquad 学号：3140102282 \\ 信息与电子工程学系}
+\maketitle
+
+\section{problem 1}
+\begin{description}
+  \item[a.] 首先，求Lagrange辅助函数\[\left( {\begin{array}{*{20}{c}}
+{{L_{2,0}}}\\
+{{L_{2,1}}}\\
+{{L_{2,2}}}
+\end{array}} \right)
+=
+ \left(\begin{array}{c} \frac{50  \left(x - \frac{3}{5}\right)  \left(x - \frac{3}{10}\right)}{9}\\ -\frac{100  x  \left(x - \frac{3}{5}\right)}{9}\\ \frac{50  x  \left(x - \frac{3}{10}\right)}{9} \end{array}\right) \]
+ 化简得
+ \begin{equation}
+\left( {\begin{array}{*{20}{c}}
+{{L_{2,0}}}\\
+{{L_{2,1}}}\\
+{{L_{2,2}}}
+\end{array}} \right)
+=
+\left(\begin{array}{c} \frac{50  x^2}{9} - 5  x + 1\\  - \frac{100  x^2}{9} + \frac{20  x}{3}\\ \frac{50  x^2}{9} - \frac{5  x}{3} \end{array}\right)
+\end{equation}
+再求Lagrange多项式，根据$
+P(x)=\left( {\begin{array}{*{20}{c}}
+{{L_{2,0}}}\\
+{{L_{2,1}}}\\
+{{L_{2,2}}}
+\end{array}} \right)
+\times
+{\left( {\begin{array}{*{20}{c}}
+{{y_0}}\\
+{{y_1}}\\
+{{y_2}}
+\end{array}} \right)^t}
+$得
+\begin{equation*}
+\begin{split}
+P(x)=
+ \left(\frac{50  \cos\!\left(\frac{9}{5}\right)  \mathrm{e}^{\frac{6}{5}}}{9} - \frac{100  \cos\!\left(\frac{9}{10}\right)  \mathrm{e}^{\frac{3}{5}}}{9} + \frac{50}{9}\right)  x^2 \\+ \left(\frac{20  \cos\!\left(\frac{9}{10}\right)  \mathrm{e}^{\frac{3}{5}}}{3} - \frac{5  \cos\!\left(\frac{9}{5}\right)  \mathrm{e}^{\frac{6}{5}}}{3} - 5\right)  x + 1
+ \end{split}
+\end{equation*}
+
+化简得
+\begin{equation}
+ P(x)=  - 11.22  x^2 + 3.808  x + 1.0
+\end{equation}
+\begin{center}
+\includegraphics[height=6.5 cm]{../pic/p11.png} \\
+Fig.1.1 Lagrange多项式插值
+\end{center}
+再求lagrange理论误差界
+\begin{equation*}
+\begin{split}
+ f(x)-P(x)=
+   \left( {\frac{{23\cos \left( {3{\mkern 1mu} \xi (x)} \right){{\rm{e}}^{2\xi (x)}}}}{3} + \frac{{3\sin \left( {3{\mkern 1mu} \xi (x)} \right){\mkern 1mu} {{\rm{e}}^{2\xi (x)}}}}{2}} \right)
+   {\mkern 1mu} x{\mkern 1mu} \left( {x - \frac{3}{5}} \right){\mkern 1mu} \left( {x - \frac{3}{{10}}} \right)
+  \end{split}
+  \end{equation*}
+这里$\exists\xi(x)\in(0,0.6)$， 很难求得$\xi(x)$的具体值，只能通过最大值估计误差界，为
+\[\mathop {\max }\limits_{0 \le x \le 0.6} \left| {\left( {\frac{{23\cos \left( {3{\mkern 1mu} \xi (x)} \right){{\rm{e}}^{2\xi (x)}}}}{3} + \frac{{3\sin \left( {3{\mkern 1mu} \xi (x)} \right){\mkern 1mu} {{\rm{e}}^{2\xi (x)}}}}{2}} \right){\mkern 1mu} } \right| * \mathop {\max }\limits_{0 \le x \le 0.6} \left| {x{\mkern 1mu} \left( {x - \frac{3}{5}} \right){\mkern 1mu} \left( {x - \frac{3}{{10}}} \right)} \right|\]
+所以，内插的误差上界为 $ 0.11371$
+  \item[b.] 类似地，Lagrange辅助函数：
+  \begin{equation}
+  \left( {\begin{array}{*{20}{c}}
+{{L_{2,0}}}\\
+{{L_{2,1}}}\\
+{{L_{2,2}}}
+\end{array}} \right)
+=
+  \left(\begin{array}{c} \frac{25  \left(x - \frac{12}{5}\right)  \left(x - \frac{13}{5}\right)}{6}\\ -\frac{25  \left(x - 2\right)  \left(x - \frac{13}{5}\right)}{2}\\ \frac{25  \left(x - 2\right)  \left(x - \frac{12}{5}\right)}{3} \end{array}\right)
+=\left(\begin{array}{c} \frac{25  x^2}{6} - \frac{125  x}{6} + 26\\  - \frac{25  x^2}{2} + \frac{115  x}{2} - 65\\ \frac{25  x^2}{3} - \frac{110  x}{3} + 40 \end{array}\right)
+\end{equation}
+
+Lagrange多项式插值函数
+\begin{equation*}
+\begin{split}
+P(x)=
+  \left(
+ \frac{25  \sin\!\left(\mathrm{log}\!\left(2\right)\right)}{6}
+  - \frac{25  \sin\!\left(\mathrm{log}\!\left(\frac{12}{5}\right)\right)}{2}
+   + \frac{25  \sin\!\left(\mathrm{log}\!\left(\frac{13}{5}\right)\right)}{3}
+   \right)
+     x^2
+   +  \\
+    \left(
+    \frac{115  \sin\!\left(\mathrm{log}\!\left(\frac{12}{5}\right)\right)}{2}
+    - \frac{125  \sin\!\left(\mathrm{log}\!\left(2\right)\right)}{6}
+     - \frac{110  \sin\!\left(\mathrm{log}\!\left(\frac{13}{5}\right)
+     \right)}{3}
+     \right)
+       x
+      +  \\
+      \left(
+      26  \sin\!\left(\mathrm{log}\!\left(2\right)\right) - 65  \sin\!\left(\mathrm{log}\!\left(\frac{12}{5}\right)\right)
+      + 40  \sin\!\left(\mathrm{log}\!\left(\frac{13}{5}\right)\right)
+      \right)
+\end{split}
+\end{equation*}
+化简得，
+\begin{equation}
+ P(x)=
+      - 0.1306  x^2 + 0.897  x - 0.6325
+\end{equation}
+\begin{center}
+\includegraphics[height=6.5 cm]{../pic/p122.png} \\
+Fig.1.2 内插拟合度较好
+\end{center}
+\begin{center}
+\includegraphics[height=6.5 cm]{../pic/p12.png} \\
+Fig.1.3 外插偏差较大
+\end{center}
+可以看出Lagrange多项式插值内插拟合得很好，但是外插误差较大。
+下求内插的误差上界，
+ \[
+ f(x)-P(x)=
+ \left|\left(\frac{\cos\!\left(\mathrm{log}\!\left(x\right)\right)}{6  x^3} + \frac{\sin\!\left(\mathrm{log}\!\left(x\right)\right)}{2  x^3}\right)  \left(x - 2\right)  \left(x - \frac{12}{5}\right)  \left(x - \frac{13}{5}\right)\right| \]
+ 计算得，内插误差不超过$ 0.00094579$
+\end{description}
+下面是计算Lagrange多项式的m代码，由于用了tex代码生成看起来可能有点复杂，但是实现起来还是蛮方便的。
+\begin{lstlisting}
+%% problem 1
+hdl=fopen('p1.txt','w');
+fclose(hdl);
+disp('problem 1')
+syms f x
+f=exp(2*x)*cos(3*x);
+xn=[0,0.3,0.6].';
+[r,err]=LagInter(f,xn);
+%disp(double(coeffs(r)))
+disp(vpa(r))
+%disp('Visually oriented, it is ') ;pretty(vpa(r))
+fprintf('The bound of abosolute error is   ');disp(vpa(err,5))
+%clipboard=latex(r);
+
+f=sin(log(x));
+xn=[2.0,2.4,2.6].';
+[r,err]=LagInter(f,xn);
+%disp(double(coeffs(r)))
+disp(vpa(r))
+%disp('Visually oriented, it is '); pretty(vpa(r))
+fprintf('The bound of abosolute error is   ');disp(vpa(err,5))
+\end{lstlisting}
+\lstinputlisting{../mcode/LagInter.m}
+
+\section{problem 2}Lagrange辅助函数：
+\begin{equation}
+  \left( {\begin{array}{*{20}{c}}
+{{L_{2,0}}}\\
+{{L_{2,1}}}\\
+{{L_{2,2}}}
+\end{array}} \right)
+=
+ \left(\begin{array}{c} - \left(x - 1\right)  \left(x - 2\right)  \left(x - \frac{1}{2}\right)\\ \frac{8  x  \left(x - 1\right)  \left(x - 2\right)}{3}\\ - 2  x  \left(x - 2\right)  \left(x - \frac{1}{2}\right)\\ \frac{x  \left(x - 1\right)  \left(x - \frac{1}{2}\right)}{3} \end{array}\right)
+ =
+ \left(\begin{array}{c}  - 1  x^3 + \frac{7  x^2}{2} - \frac{7  x}{2} + 1\\ \frac{8  x^3}{3} - 8  x^2 + \frac{16  x}{3}\\  - 2  x^3 + 5  x^2 - 2  x\\ \frac{x^3}{3} - \frac{x^2}{2} + \frac{x}{6} \end{array}\right)
+ \end{equation}
+Lagrange多项式$x^{3}$项系数为\[\frac{8}{3}y-6+\frac{2}{3}\] 其值为6， 解得： $y=4.25$
+
+\section{problem 3}{ \thm{Neville's method}
+  $f$在$x_0,x_1,...x_n$上有定义，$x_i \neq x_j$, 那么f的第$k+1$阶内插多项式为
+  \begin{equation}
+  P_{0,1,...,n}=\frac{(x-x_j)P_{-j}(x)-(x-x_i)P_{-i}(x)}{x_i-x_j}
+  \end{equation}
+  其中，$P_{-j}$表示$P_{0,i,...,j,j-1,j+1,...,n}$，为第$k$阶Lagrange多项式
+  }
+\begin{description}
+  \item[a]
+  由$P_{2,3}$和$P_{2}$得，\[P_{2}=4\]
+  \item[b]由$P_{0,1},$得$P_1=3$, $P_0=1$; 由$P_{0,2}$得,$P_2=3, P_0=1$
+  \\所以$P_{0,1,2}(2.5)=2.25$
+  \\又因为$P_{1,2,3}(2.5)=3$,所以\[P_{0,1,2,3}(2.5)=2.875\]
+\end{description}
+\section{problem 4}
+\de{Divided Difference}
+对于函数$f$，如果$x_0...x_n$已知，则定义差分递推式为
+\begin{align}\label{1}
+  f[x_{\nu }] & =f(x_{\nu }) \\ \nonumber &\qquad \text{when } \nu \in \{0,\ldots ,k\} \\
+  f[x_{\nu },\ldots ,x_{\nu +j}] &= {\frac {f[x_{\nu +1},\ldots ,x_{\nu +j}]-f[x_{\nu },\ldots ,x_{\nu +j-1}]}{x_{\nu +j}-x_{\nu }}}\\ \nonumber
+  &\qquad \text{when } \nu \in \{0,\ldots ,k-j\},\ j\in \{1,\ldots ,k\}
+\end{align}
+代入递推式得，
+\begin{table}[h]\begin{tabular}{llll}
+\hline
+$x_0=0.0$&$f[x_0]=1$&&\\
+&&$f[x_0,x_1]=5$&\\
+$x_1=0.4$&$f[x_1]=3$&&$f[x_0,x_1,x_2]=\frac{50}{7}$\\
+&&$f[x_1,x_2]=10$&\\
+$x_2=0.7$&$f[x_2]=6$&&\\
+\hline
+\end{tabular}
+\end{table}
+
+\section{problem 5}
+三次样条插值，先假设
+\begin{displaymath}
+S_i(x) = a_i(x - x_i)^3 + b_i(x - x_i)^2 + c_i(x - x_i) + d_i  \
+\mbox{for $x \in [x_i,x_{i+1}].$}
+\end{displaymath}
+需要满足:\begin{enumerate}
+      \item $S_i(x_i) = y_i,     S_i(x_{i+1}) = y_{i+1}$
+      \item $S^\prime_{i-1}(x_i) = S^\prime_i(x_i)$
+      \item $S^{\prime\prime}_{i-1}(x_i) = S^{\prime\prime}_i(x_i)$
+      \item $S_0(x)$ 和 $S_{n-1}(x)$ 两个边值条件
+    \end{enumerate}
+
+\begin{description}
+  \item[a).] 对自然样条插值，还需要满足： $S_0^{\prime\prime}(x_0) = 0,S_{n-1}^{\prime\prime}(x_n) = 0$
+\\ 利用老师的结论可以较快解得\textbf{c}：
+\[
+\left[\begin{array}{ccccccc}
+1 & 0 & & & & & \\
+h_0 & 2(h_0+h_1) & h_1 & & & & \\
+ & \ddots & \ddots & \ddots & & &\\
+& & \ddots & \ddots & \ddots & & \\
+& & & \ddots & \ddots & \ddots & \\
+& & & &h_{n-2} & 2(h_{n-2}+h_{n-1}) & h_{n-1}\\
+& & & & & 0 & 1
+\end{array} \right]
+ \bf{f(\vec{a})} =
+\left[\begin{array}{c}
+c_0 \\
+c_1 \\
+\vdots\\
+\vdots\\
+\vdots\\
+c_{n-1}\\
+c_n\end{array} \right].
+\]
+代入得，$\vec{c}=\vec{0}$，$\vec{d}=\vec{0}$, $\vec{b}=(0,1,0)$, $\vec{a}=(0,1,2)$. 所以
+\begin{equation}
+S(x) = x \qquad \text{for  }x \in [0,2]
+\end{equation}
+  \item[b).] 对自然样条插值，该题要求满足：$S_0^\prime(x_0) = f^\prime(x_0)=S_{n-1}^{\prime}(x_n) = f^\prime(x_n)=1$
+\[
+\left[\begin{array}{ccccccc}
+2h_0 & h_0 & & & & & \\
+h_0 & 2(h_0+h_1) & h_1 & & & & \\
+ & \ddots & \ddots & \ddots & & &\\
+& & \ddots & \ddots & \ddots & & \\
+& & & \ddots & \ddots & \ddots & \\
+& & & &h_{n-2} & 2(h_{n-2}+h_{n-1}) & h_{n-1}\\
+& & & & & h_{n-1} & 2h_{n-1}
+\end{array} \right]
+ \bf{f'(\vec{a})} =
+\left[\begin{array}{c}
+c_0 \\
+c_1 \\
+\vdots\\
+\vdots\\
+\vdots\\
+c_{n-1}\\
+c_n\end{array} \right].
+\]
+\end{description}
+解得\begin{equation}
+S(x) = x \qquad \text{for  }x \in [0,2]
+\end{equation}
+说明尽管用了不同的边值条件，但是结果是一样的！自然样条要求两端不能是最大最小，而是拐点；而对于这道题，拐点处斜率恰好为1.
+\begin{center}
+\includegraphics[height=6.5 cm]{../pic/p5.png} \\
+Fig.5.1 两种样条插值
+\end{center}
+\begin{lstlisting}
+%% probelm 5
+x=[0,1,2];xx=0:0.01:2;
+y=[0,1,2];
+ppfunc=csape(x,[0,y,0],'second');
+fnplt(ppfunc,[0,2]);
+aa=fnbrk(ppfunc,1);
+res1=poly2sym(aa.coefs);fprintf('For problem 5 : \npiecewise function on [0,1] is %s\n and on [1,2] is ',latex(res1));
+aaa=fnbrk(ppfunc,2);
+syms X
+res2=poly2sym(aaa.coefs,X-1);disp(res2)
+ppfunc.coefs;
+hold on
+ppfunc=csape(x,[1,y,1],'clamp');
+fnplt(ppfunc,[0,2],'r');
+
+
+\end{lstlisting}
+\end{CJK*}
+\end{document}
