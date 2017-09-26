@@ -1,0 +1,23 @@
+ant:
+<ant>
+  <mkdir dir="C:\Users\luzai\Desktop\3140102282_Project_1\project\MainGUI\for_redistribution" />
+  <mkdir dir="C:\Users\luzai\Desktop\3140102282_Project_1\project\MainGUI\for_testing" />
+  <mkdir dir="C:\Users\luzai\Desktop\3140102282_Project_1\project\MainGUI\for_redistribution_files_only" />
+</ant>
+mcc -C -o MainGUI -W WinMain:MainGUI -T link:exe -d C:\Users\luzai\Desktop\3140102282_Project_1\project\MainGUI\for_testing -v C:\Users\luzai\Desktop\3140102282_Project_1\project\MainGUI.m -a C:\Users\luzai\Desktop\3140102282_Project_1\project\MainGUI.fig -a C:\Users\luzai\Desktop\3140102282_Project_1\project\myPre.m 
+Compiler version: 6.0 (R2015a)
+Dependency analysis by REQUIREMENTS.
+[Warning: Adding path "C:\Users\luzai\Desktop\3140102282_Project_1\project" to
+Compiler path instance.] 
+Parsing file "C:\Users\luzai\Desktop\3140102282_Project_1\project\MainGUI.m"
+	(Referenced from: "Compiler Command Line").
+Deleting 0 temporary MEX authorization files.
+Generating file "C:\Users\luzai\Desktop\3140102282_Project_1\project\MainGUI\for_testing\readme.txt".
+Packaging...
+Adding custom icon C:\Users\luzai\Desktop\3140102282_Project_1\project\MainGUI_resources\icon.ico to C:\Users\luzai\Desktop\3140102282_Project_1\project\MainGUI\for_testing\MainGUI.exe.
+Attempting to embed the CTF archive into the application C:\Users\luzai\Desktop\3140102282_Project_1\project\MainGUI\for_testing\MainGUI.exe.
+Finished embedding CTF archive. Deleting the external CTF archive.
+Creating the bundle...
+Web based installer created at C:\Users\luzai\Desktop\3140102282_Project_1\project\MainGUI\for_redistribution\MyAppInstaller_web.exe.
+Packaging complete.
+Elapsed packaging time was: 1 minutes and 21 seconds.
